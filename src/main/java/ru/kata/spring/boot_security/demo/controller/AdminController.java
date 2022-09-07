@@ -79,51 +79,16 @@ public class AdminController {
         return user;
     }
 
+    @DeleteMapping("/users/{id}")
+    public String deleteUser(@PathVariable("id") long id) {
 
-//    @GetMapping
-//    public String main(Model model, Principal principal) {
-//        model.addAttribute("user", userService.findByUsername(principal.getName()));
-//        model.addAttribute("users",userService.getAll());
-//        model.addAttribute("listRoles", userService.listRoles());
-//        return "admin";
-//    }
-//
-//    @GetMapping("/search")
-//    public String searchUser(@RequestParam(value = "keyword") String keyword, Model model) {
-//        model.addAttribute("users", userService.search(keyword));
-//        return "searchUser";
-//    }
-//
-//    @GetMapping("/newUser")
-//    public String newUser(Model model) {
-//        model.addAttribute("user", new User());
-//        model.addAttribute("listRoles", userService.listRoles());
-//        return "newUser";
-//    }
-//
-//    @PostMapping()
-//    public String createUser(@ModelAttribute("user") User user) {
-//        userService.save(user);
-//        return "redirect:/admin";
-//    }
-//
-//    @GetMapping("/{id}/edit")
-//    public String editUser(@PathVariable("id") long id, Model model) {
-//        model.addAttribute("user", userService.get(id));
-//        model.addAttribute("listRoles", userService.listRoles());
-//        return "editUser";
-//    }
-//
-//    @PatchMapping("/{id}")
-//    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") long id) {
-//        userService.update(user);
-//        return "redirect:/admin";
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public String deleteUser(@PathVariable("id") long id) {
-//        userService.delete(id);
-//        return "redirect:/admin";
-//    }
+        User user = userService.get(id);
+        if (user == null) {
+            throw new NoSuchUserException("There is no user with ID = " + id + " in Database");
 
+        }
+
+        userService.delete(id);
+        return "User with ID " + id + " was deleted";
+    }
 }
