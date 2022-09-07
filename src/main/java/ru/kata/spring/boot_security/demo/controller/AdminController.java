@@ -72,7 +72,11 @@ public class AdminController {
 //            "credentialsNonExpired": true
 //    }
 
-
+    @PutMapping("/users")
+    public User updateUser(@RequestBody User user) {
+        userService.save(user);
+        return user;
+    }
 
 
 //    @GetMapping
