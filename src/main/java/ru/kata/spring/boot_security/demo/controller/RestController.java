@@ -3,36 +3,37 @@ package ru.kata.spring.boot_security.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.exception.NoSuchUserException;
-import ru.kata.spring.boot_security.demo.exception.UserIncorrectData;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-import java.security.Principal;
 import java.util.List;
 
-@RestController
-@RequestMapping("/admin/api")
-public class AdminController {
+@org.springframework.web.bind.annotation.RestController
+@RequestMapping("/admin/api/users")
+public class RestController {
 
     private final UserService userService;
 
     @Autowired
-    public AdminController(UserService userService) {
+    public RestController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
-    public List<User> showAllUsers() {
+    @GetMapping
+    public ResponseEntity<List<User>> showAllUsers() {
+
         List<User> allUsers = userService.getAll();
 
-        return allUsers;
+        return allUsers != null && !allUsers.isEmpty()
+                ? new ResponseEntity<>(allUsers, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public User getUser(@PathVariable("id") long id) {
         User user = userService.get(id);
 
@@ -43,13 +44,16 @@ public class AdminController {
         return user;
     }
 
-    @PostMapping("/users")
-    public User addNewUser(@RequestBody User user) {
-        userService.save(user);
-        return user;
+    @PostMapping()
+    public  ResponseEntity<User> addNewUser(@RequestBody User user) {
+
+        if (userService.findByUsername(user.getUsername()) == null) {
+            userService.save(user);
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    // EXAMPLE
+    // POST EXAMPLE
 //    {
 //        "username": "NEW",
 //            "password": "$2a$10$Vyt/5ofJsaWhBZYqiO3NJ.shobREvA9Y4WyRiDHKMD87GUQa.wyFO",
@@ -72,23 +76,26 @@ public class AdminController {
 //            "credentialsNonExpired": true
 //    }
 
-    // need ID ^
-    @PutMapping("/users")
-    public User updateUser(@RequestBody User user) {
-        userService.save(user);
-        return user;
+
+    // as POST, but need ID ^
+    @PutMapping()
+    public ResponseEntity<?> updateUser(@RequestBody User user) {
+
+        userService.update(user);
+
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping("/users/{id}")
-    public String deleteUser(@PathVariable("id") long id) {
-
-        User user = userService.get(id);
-        if (user == null) {
-            throw new NoSuchUserException("There is no user with ID = " + id + " in Database");
-
-        }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable("id") long id) {
 
         userService.delete(id);
-        return "User with ID " + id + " was deleted";
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/roles")
+    private List<Role> allRoles() {
+        return userService.listRoles();
     }
 }

@@ -32,30 +32,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-//                .cors()
-//                .and()
-                .csrf().disable();
-//                .authorizeRequests()
-//                .antMatchers("/").permitAll()
-//
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/").permitAll()
 
+                .antMatchers("/styles/css/**").permitAll()
+                .antMatchers("/images/**").permitAll()
+                .antMatchers("/js/**").permitAll()
 
+                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
+                .anyRequest().authenticated()
 
-//                .antMatchers("/styles/css/**").permitAll()
-//                .antMatchers("/images/**").permitAll()
-//                .antMatchers("/js/**").permitAll()
-//
-//                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-//                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
-//                .anyRequest().authenticated()
-//
-//                .and()
-//                .formLogin().loginPage("/").successHandler(successUserHandler)
-//                .permitAll()
-//
-//                .and()
-//                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .permitAll();
+                .and()
+                .formLogin().loginPage("/").successHandler(successUserHandler)
+                .permitAll()
+
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .permitAll();
     }
 
 

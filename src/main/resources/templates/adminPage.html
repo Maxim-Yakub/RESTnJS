@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin page</title>
+
+    <link rel="stylesheet" type="text/css" href="/styles/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/css/sidebar.css"/>
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+
+</head>
+
+<body>
+<div id="header" class="d-flex bg-dark">
+    <div id="header_username" class="p-2 text-white font-weight-bold"></div>
+    <div id="header_roles" class="p-2 w-100 text-white"></div>
+    <a class="p-2 text-secondary text-right text-decoration-none" th:href="@{/logout}">Logout</a>
+</div>
+
+
+<nav class="navbar navbar-expand navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" id="navEmail" href="#"> </a>
+    <div class="collapse
+    navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" id="navRoles" href="#"></a>
+            </li>
+        </ul>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid bg-light min-vh-100">
+    <div class="row min-vh-100">
+        <nav class="col-2 p-0 bg-white sidebar border">
+            <div class="sidebar-sticky">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/admin}">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/user}">User</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="col-10 right">
+            <div class="container-fluid pt-5 mt-4">
+                <h2>Admin panel</h2>
+
+                <!--Навигация начало-->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#usersTable">Users Table</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#addUser" onclick="showNewModal()">New User</a>
+                    </li>
+                </ul>
+                <!--Навигация конец-->
+
+                <!-- Панели от навигации -->
+                <div class="tab-content">
+
+                    <!--1. Таблица всех пользователей начало-->
+                    <div class="tab-pane fade show active border" id="usersTable">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>All users</h4>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>USERNAME</th>
+                                        <th>EMAIL</th>
+                                        <th>ROLES</th>
+                                        <th>EDIT</th>
+                                        <th>DELETE</th>
+                                    </tr>
+                                    </thead>
+                                    <!--                                    JS tableBody-->
+                                    <tbody id="tableBodyInfo"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NEW USER -->
+                    <div class="tab-pane fade" id="addUser">
+                        <h4>Add new User</h4>
+                        <div class="col-md bg-white border">
+                            <form id="newUserForm" align="center" class="offset-md-4 col-md-3 mt-4 mb-4">
+
+                                <label for="newUsername"><b>Username</b></label>
+                                <input class="form-control" id="newUsername" required/>
+
+
+                                <label for="newEmail"><b>Email</b></label>
+                                <input class="form-control" id="newEmail" required/>
+
+
+                                <label for="newPassword"><b>Password</b></label>
+                                <input class="form-control" id="newPassword" required/>
+                                <div class="form-group text-center was-validated">
+                                    <label for="newRoles"><b>Role</b></label>
+                                    <select multiple class="form-control"
+                                            id="newRoles" name="roles"
+                                            size="2" required value="roles">
+                                    </select>
+                                </div>
+                                <br>
+                                <button type="submit" onclick="addUser()" class="btn btn-success">Add new user</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/fetch/navInfo.js"></script>
+<script src="js/fetch/tableBody.js"></script>
+<script src="js/fetch/addUser.js"></script>
+
+<script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+</body>
+</html>
