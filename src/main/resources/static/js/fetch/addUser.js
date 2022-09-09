@@ -1,19 +1,32 @@
 function addUser() {
     let newUserForm = document.getElementById("newUserForm");
     let formData = new FormData(newUserForm);
+    // // let newRoles = [];
+    // let roleForm = window.newUserForm.newRoles;
+    // for (let i = 0; i < roleForm.length; i++) {
+    //     let option = roleForm.options[i];
+    //     if (option.selected) {
+    //         newRoles[i] = option.value
+    //     }
+    // }
     let user = {
-        username: formData.get('newUsername'),
-        email: formData.get('newEmail'),
-        password: formData.get('newPassword'),
-        roles: Array.from(document.getElementById("newUserForm.newRoles"))
+        username: formData.get('username'),
+        email: formData.get('email'),
+        password: formData.get('password'),
+        roles: Array.from(document.getElementById("newRoles"))
             .filter(option => option.selected)
             .map(option => ({value: option.value, id: option.id}))
+
+
     }
-    fetch('/admin/api/users', {
+    fetch('http://localhost:8080/admin/api/users', {
         method: 'POST',
-        body: JSON.stringify(user),
-        headers: {'Accept': 'application/json', "Content-type": "application/json; charset=UTF-8"}
+
+        headers: { 'Accept': 'application/json',"Content-type": "application/json; charset=UTF-8"},
+        body: JSON.stringify(user)
+
     })
+        .then(response => response.json())
         .then((r) => {
             refreshTable();
             tableBody();
@@ -47,7 +60,7 @@ async function showNewModal() {
     let allRoles = await getAllRoles();
     allRoles.forEach((role) => {
         let option = document.createElement('option');
-        option.setAttribute('value', role.name);
+        option.setAttribute('value', role);
         option.setAttribute('id', role.id);
         option.setAttribute('name', role.name);
         option.appendChild(document.createTextNode(role.name));
