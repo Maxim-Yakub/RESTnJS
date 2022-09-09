@@ -34,14 +34,12 @@ public class RestController {
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable("id") long id) {
+    public ResponseEntity<User> getUser(@PathVariable("id") long id) {
         User user = userService.get(id);
 
-        if (user == null) {
-            throw new NoSuchUserException("There is no user with ID = " + id + " in Database");
-
-        }
-        return user;
+        return (user != null)
+                ? new ResponseEntity<>(user, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping()

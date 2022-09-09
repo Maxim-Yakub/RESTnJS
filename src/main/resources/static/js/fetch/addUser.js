@@ -13,7 +13,6 @@ function addUser() {
         e.preventDefault();
         fetch('http://localhost:8080/admin/api/users', {
             method: 'POST',
-            // 'Accept': 'application/json',
             headers: {"Content-type": "application/json; charset=UTF-8"},
             body: JSON.stringify(user)
 
