@@ -1,14 +1,6 @@
 function addUser() {
     let newUserForm = document.getElementById("newUserForm");
     let formData = new FormData(newUserForm);
-    // // let newRoles = [];
-    // let roleForm = window.newUserForm.newRoles;
-    // for (let i = 0; i < roleForm.length; i++) {
-    //     let option = roleForm.options[i];
-    //     if (option.selected) {
-    //         newRoles[i] = option.value
-    //     }
-    // }
     let user = {
         username: formData.get('username'),
         email: formData.get('email'),
@@ -16,29 +8,30 @@ function addUser() {
         roles: Array.from(document.getElementById("newRoles"))
             .filter(option => option.selected)
             .map(option => ({value: option.value, id: option.id}))
-
-
     }
-    fetch('http://localhost:8080/admin/api/users', {
-        method: 'POST',
+    newUserForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        fetch('http://localhost:8080/admin/api/users', {
+            method: 'POST',
+            // 'Accept': 'application/json',
+            headers: {"Content-type": "application/json; charset=UTF-8"},
+            body: JSON.stringify(user)
 
-        headers: { 'Accept': 'application/json',"Content-type": "application/json; charset=UTF-8"},
-        body: JSON.stringify(user)
-
-    })
-        .then(response => response.json())
-        .then((r) => {
-            refreshTable();
-            tableBody();
-            $('.nav-tabs a[href="#usersTable"]').tab('show');
         })
+            .then((r) => {
+                refreshTable();
+                tableInfo();
+                $('.nav-tabs a[href="#usersTable"]').tab('show');
+            })
+    })
 }
 
 function refreshTable() {
-    let table = document.querySelector('#usersTable')
-    for (let i = table.rows.length - 1; i >= 0; i--) {
-        table.deleteRow(i)
+    let table = document.querySelector('#tableBodyInfo')
+    while (table.rows.length > 1) {
+        table.deleteRow(1)
     }
+    setTimeout(tableInfo, 50);
 }
 
 function getAllRoles() {

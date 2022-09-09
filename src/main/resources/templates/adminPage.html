@@ -53,14 +53,11 @@
                 <h2>Admin panel</h2>
 
                 <!--Навигация начало-->
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#usersTable">Users Table</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#addUser" onclick="showNewModal()">New User</a>
-                    </li>
-                </ul>
+                <div class="nav nav-tabs">
+                    <a class="nav-item nav-link active" id="navUsersTable" role="tab" data-toggle="tab" href="#usersTable">Users
+                        Table</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#addUser" onclick="showNewModal()">New User</a>
+                </div>
                 <!--Навигация конец-->
 
                 <!-- Панели от навигации -->
@@ -84,7 +81,7 @@
                                         <th>DELETE</th>
                                     </tr>
                                     </thead>
-                                    <!--                                    JS tableBody-->
+                                    <!--                                    JS tableInfo-->
                                     <tbody id="tableBodyInfo"></tbody>
                                 </table>
                             </div>
@@ -126,7 +123,7 @@
 </div>
 
 <script src="js/fetch/navInfo.js"></script>
-<script src="js/fetch/tableBody.js"></script>
+<script src="js/fetch/tableInfo.js"></script>
 <script src="js/fetch/addUser.js"></script>
 
 <script type="text/javascript" src="js/bootstrap.bundle.js"></script>

@@ -1,6 +1,6 @@
-tableBody();
+tableInfo();
 
-function tableBody() {
+function tableInfo() {
     let tableBodyInfo = document.getElementById("tableBodyInfo");
     tableBodyInfo.innerHTML = "";
     fetch('http://localhost:8080/admin/api/users')
