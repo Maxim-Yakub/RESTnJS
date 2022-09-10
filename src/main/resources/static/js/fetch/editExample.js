@@ -80,8 +80,8 @@ function editUser() {
     let new_Roles = [];
     let rolesList = document.createElement('ul');
 
-    for (var i = 0; i < form.length; i++) {
-        var option = form.options[i];
+    for (let i = 0; i < form.length; i++) {
+        let option = form.options[i];
         let role = document.createElement('li');
         if (option.selected) {
             new_Roles[i] = option.value
