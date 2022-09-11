@@ -77,11 +77,11 @@ public class RestController {
 
     // as POST, but need ID ^
     @PutMapping()
-    public ResponseEntity<?> updateUser(@RequestBody User user) {
+    public void updateUser(@RequestBody User user) {
 
         userService.update(user);
 
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+//        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
