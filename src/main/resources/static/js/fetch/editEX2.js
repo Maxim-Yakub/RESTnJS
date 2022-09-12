@@ -35,7 +35,7 @@ async function modalEdit(id) {
         '                    <p>' +
         '                        <label>Password</label>' +
         '                        <input class="form-control form-control-sm" type="password"' +
-        '                               id="editPassword" name="password" value="' + user.password + '">' +
+        '                               id="editPassword" name="password" value="">' +
         '                    </p>' +
         '                    <p>' +
         '                        <label>Role</label>' +
@@ -74,8 +74,8 @@ async function modalEdit(id) {
         option.setAttribute('id', role.id);
         option.setAttribute('name', role.name);
         option.appendChild(document.createTextNode(role.name));
-        user.roles.forEach((role)=> {
-            if(option.text == role.name) {
+        user.roles.forEach((role) => {
+            if (option.text == role.name) {
                 option.selected = true;
             }
         });
@@ -99,4 +99,44 @@ async function modalEdit(id) {
 async function getUser(id) {
     let response = await fetch('http://localhost:8080/admin/api/users/' + id);
     return await response.json();
+}
+
+function editUser() {
+    let editForm = document.getElementById("formEditUser");
+    let formData = new FormData(editForm);
+
+    let user = {
+        id: formData.get('id'),
+        username: formData.get('username'),
+        email: formData.get('email'),
+        password: formData.get('password'),
+        roles: Array.from(document.getElementById("editRoles"))
+            .filter(option => option.selected)
+            .map(option => ({name: option.value, id: option.id}))
+    }
+    let id = window.formEditUser.editID.value;
+    fetch("/admin/api/users", {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+        // .then(response => {
+        //     $('#' + id).replaceWith('<tr id=' + id + '>' +
+        //         '<td>' + id + '</td>' +
+        //         '<td>' + window.formEditUser.editUsername.value + '</td>' +
+        //         '<td>' + window.formEditUser.editEmail.value + '</td>' +
+        //         '<td>' + rolesList.textContent + '</td>' +
+        //         '<td> <button type="button" onclick="modalEdit(' + id + ')" class="btn btn-primary btn-sm">Edit</button> </td>' +
+        //         '<td> <button type="button" onclick="modalDelete(' + id + ')" class="btn btn-danger btn-sm">Delete</button> </td>' +
+        //         '</tr>');
+        // });
+
+        .then((r) => {
+            refreshTable();
+            // tableInfo();
+            $('.nav-tabs a[href="#usersTable"]').tab('show');
+        });
 }

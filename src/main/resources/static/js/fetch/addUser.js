@@ -19,10 +19,11 @@ function addUser() {
         })
             .then((r) => {
                 refreshTable();
-                tableInfo();
+                // tableInfo();
                 $('.nav-tabs a[href="#usersTable"]').tab('show');
             })
     })
+    // $("#newRoles").empty();
 }
 
 function refreshTable() {
