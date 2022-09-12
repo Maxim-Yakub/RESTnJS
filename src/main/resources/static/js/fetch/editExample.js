@@ -1,4 +1,4 @@
-async function modalEdit(id) {
+function modalEdit(id) {
 
     fetch('http://localhost:8080/admin/api/users/' + id)
         .then(response => response.json())
@@ -88,7 +88,7 @@ async function modalEdit(id) {
 
     allRoles.forEach((role) => {
         let option = document.createElement('option');
-        option.setAttribute('value', role.name);
+        option.setAttribute('value', role);
         option.setAttribute('id', role.id);
         option.setAttribute('name', role.name);
         option.appendChild(document.createTextNode(role.name));
