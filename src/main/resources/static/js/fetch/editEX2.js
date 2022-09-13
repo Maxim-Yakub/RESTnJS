@@ -41,13 +41,8 @@ async function modalEdit(id) {
         '                        <label>Role</label>' +
         '                        <select id="editRoles" name="roles" multiple size="2" required="required" ' +
         '                               class="form-control form-control-sm">' +
-        // '                            <option value="ROLE_ADMIN"' + adminSelect + '>ADMIN</option>' +
-        // '                            <option value="ROLE_USER"' + userSelect + '>USER</option>' +
         '                        </select>' +
-        // <select multiple className="form-control"
-        //         id="newRoles" name="roles"
-        //         size="2" required value="roles">
-        // </select> +
+
         '                    </p>' +
         '                </form>' +
         '            </div>' +
