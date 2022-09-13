@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User page</title>
+
+    <link rel="stylesheet" type="text/css" href="/styles/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/css/sidebar.css"/>
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+
+</head>
+
+<body>
+<div id="header" class="d-flex bg-dark">
+    <div id="header_username" class="p-2 text-white font-weight-bold"></div>
+    <div id="header_roles" class="p-2 w-100 text-white"></div>
+    <a class="p-2 text-secondary text-right text-decoration-none" th:href="@{/logout}">Logout</a>
+</div>
+
+<!--ШАПКА-->
+<nav class="navbar navbar-expand navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" id="navEmail" href="#"> </a>
+    <div class="collapse
+    navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" id="navRoles" href="#"></a>
+            </li>
+        </ul>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!--ЛЕВАЯ БОКОВАЯ ПАНЕЛЬ-->
+<div class="container-fluid bg-light min-vh-100">
+    <div class="row min-vh-100">
+        <nav class="col-2 p-0 bg-white sidebar border">
+            <div class="sidebar-sticky">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#userPanel">User</a>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!--        ОСНОВНАЯ ПАНЕЛЬ-->
+        <div class="col-10 right">
+            <div class="tab-content">
+                <!--                ПАНЕЛЬ ПОЛЬЗОВАТЕЛЯ-->
+                <div class="container-fluid pt-5 mt-4  tab-pane show active" id=userPanel>
+
+                    <h2>User information-page</h2>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>About user</h4>
+                                </div>
+                                <div class="card-body bg-white">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>USERNAME</th>
+                                            <th>EMAIL</th>
+                                            <th>ROLES</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="userTable">
+                                        <!--                                            ЗДЕСЬ СКРИПТ!!!-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalWindow"></div>
+<div class="modal fade mx-auto" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm mx-auto" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">TITLE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/fetch/userInfo.js"></script>
+
+<script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+</body>
+</html>

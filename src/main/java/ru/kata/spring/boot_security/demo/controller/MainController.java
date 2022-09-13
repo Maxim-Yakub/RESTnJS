@@ -35,19 +35,11 @@ public class MainController {
 
     @GetMapping("/user")
     public String showUserPage() {
-        return "user";
+        return "userPage";
     }
 
     @GetMapping("/admin")
     public String showAdminPage() {
         return "adminPage";
-    }
-
-    @GetMapping("/info")
-    public ResponseEntity<?> getUser(Principal principal) {
-//        UserDetails userDetails
-//                = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userService.findByUsername(principal.getName());
-        return ResponseEntity.ok().body(user);
     }
 }

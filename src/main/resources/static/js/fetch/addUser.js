@@ -11,7 +11,7 @@ function addUser() {
     }
     newUserForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        fetch('http://localhost:8080/admin/api/users', {
+        fetch('/api/admin/users', {
             method: 'POST',
             headers: {"Content-type": "application/json; charset=UTF-8"},
             body: JSON.stringify(user)
@@ -23,7 +23,6 @@ function addUser() {
                 $('.nav-tabs a[href="#usersTable"]').tab('show');
             })
     })
-    // $("#newRoles").empty();
 }
 
 function refreshTable() {
@@ -35,7 +34,7 @@ function refreshTable() {
 }
 
 function getAllRoles() {
-    return fetch("/admin/api/users/roles")
+    return fetch("/api/admin/users/roles")
         .then((response) => {
             let res = response.json();
             return res;

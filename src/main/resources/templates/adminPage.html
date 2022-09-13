@@ -42,12 +42,10 @@
             <div class="sidebar-sticky">
                 <ul class="nav nav-pills flex-column">
                     <li class="nav-item">
-                        <!--                        <a class="nav-link active" th:href="@{/admin}">Admin</a>-->
                         <a class="nav-link active" data-toggle="tab" id="adminTab" href="#adminPanel">Admin</a>
 
                     </li>
                     <li class="nav-item">
-                        <!--                        <a class="nav-link" th:href="@{/user}">User</a>-->
                         <a class="nav-link" data-toggle="tab" href="#userPanel">User</a>
 
                     </li>
@@ -141,10 +139,7 @@
                 <div class="container-fluid pt-5 mt-4  tab-pane" id=userPanel>
 
                     <h2>User information-page</h2>
-                    <!-- Панели от навигации -->
                     <div class="tab-content">
-
-                        <!--1. Таблица всех пользователей начало-->
                         <div class="tab-pane fade show active">
                             <div class="card">
                                 <div class="card-header">
@@ -160,9 +155,7 @@
                                             <th>ROLES</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-<!--                                            ЗДЕСЬ СКРИПТ!!!-->
-                                        </tbody>
+                                        <tbody id="userTable"></tbody>
                                     </table>
                                 </div>
                             </div>
@@ -186,12 +179,13 @@
         </div>
     </div>
 </div>
-<script src="js/fetch/navInfo.js"></script>
+
+<!--<script src="js/fetch/navInfo.js"></script>-->
 <script src="js/fetch/tableInfo.js"></script>
 <script src="js/fetch/addUser.js"></script>
 <script src="js/fetch/deleteUser.js"></script>
-<!--<script src="js/fetch/editExample.js"></script>-->
-<script src="js/fetch/editEX2.js"></script>
+<script src="js/fetch/editUser.js"></script>
+<script src="js/fetch/userInfo.js"></script>
 
 <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
 </body>

@@ -92,7 +92,7 @@ async function modalEdit(id) {
 }
 
 async function getUser(id) {
-    let response = await fetch('http://localhost:8080/admin/api/users/' + id);
+    let response = await fetch('/api/admin/users/' + id);
     return await response.json();
 }
 
@@ -110,7 +110,7 @@ function editUser() {
             .map(option => ({name: option.value, id: option.id}))
     }
     let id = window.formEditUser.editID.value;
-    fetch("/admin/api/users", {
+    fetch("/api/admin/users", {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
