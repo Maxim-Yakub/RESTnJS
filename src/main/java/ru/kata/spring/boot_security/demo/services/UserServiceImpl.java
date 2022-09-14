@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
-import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 import java.util.List;
 
@@ -16,53 +14,51 @@ UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    private final
-    RoleRepository roleRepository;
-
-
-
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+
         this.passwordEncoder = passwordEncoder;
     }
 
     @Autowired
-    public UserServiceImpl(UserRepository repository, RoleRepository roleRepository) {
+    public UserServiceImpl(UserRepository repository) {
+
         this.userRepository = repository;
-        this.roleRepository = roleRepository;
     }
 
-    public void save(User user) {
+    public void createUser(User user) {
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         userRepository.save(user);
     }
 
-    public List<User> getAll() {
+    public List<User> getAllUsers() {
+
         return (List<User>) userRepository.findAll();
     }
 
-    public User get(Long id) {
+    public User getUserById(Long id) {
+
         return userRepository.findById(id).get();
     }
 
-    public void delete(Long id) {
+    public void deleteUserById(Long id) {
+
         userRepository.deleteById(id);
     }
 
     @Transactional
-    public void update(User updatedUser) {
-        save(updatedUser);
+    public void updateUser(User updatedUser) {
+
+        createUser(updatedUser);
     }
 
     @Override
-    public User findByUsername(String username) {
+    public User findUserByUsername(String username) {
+
         return userRepository.findByUsername(username);
     }
-
-    public List<Role> listRoles() {
-        return roleRepository.findAll();
-    }
-
 }

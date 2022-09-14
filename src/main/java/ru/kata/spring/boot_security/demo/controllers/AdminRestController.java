@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
 import java.util.List;
@@ -16,15 +17,20 @@ public class AdminRestController {
 
     private final UserService userService;
 
+    private final RoleService roleService;
+
     @Autowired
-    public AdminRestController(UserService userService) {
+    public AdminRestController(UserService userService, RoleService roleService) {
+
         this.userService = userService;
+
+        this.roleService = roleService;
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> showAllUsers() {
+    public ResponseEntity<List<User>> getAllUsers() {
 
-        List<User> allUsers = userService.getAll();
+        List<User> allUsers = userService.getAllUsers();
 
         return allUsers != null && !allUsers.isEmpty()
 
@@ -33,8 +39,8 @@ public class AdminRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable("id") long id) {
-        User user = userService.get(id);
+    public ResponseEntity<User> getUserById(@PathVariable("id") long id) {
+        User user = userService.getUserById(id);
 
         return (user != null)
 
@@ -43,11 +49,11 @@ public class AdminRestController {
     }
 
     @PostMapping()
-    public  ResponseEntity<User> addNewUser(@RequestBody User user) {
+    public  ResponseEntity<User> createUser(@RequestBody User user) {
 
-        if (userService.findByUsername(user.getUsername()) == null) {
+        if (userService.findUserByUsername(user.getUsername()) == null) {
 
-            userService.save(user);
+            userService.createUser(user);
         }
 
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -55,20 +61,21 @@ public class AdminRestController {
 
     @PutMapping()
     public void updateUser(@RequestBody User user) {
-        userService.update(user);
+
+        userService.updateUser(user);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable("id") long id) {
+    public ResponseEntity<User> deleteUserById(@PathVariable("id") long id) {
 
-        userService.delete(id);
+        userService.deleteUserById(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/roles")
-    private List<Role> allRoles() {
+    private List<Role> getAllRoles() {
 
-        return userService.listRoles();
+        return roleService.getAllRoles();
     }
 }
