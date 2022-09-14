@@ -65,7 +65,7 @@
                     <!--Навигация начало-->
                     <div class="nav nav-tabs">
                         <a class="nav-item nav-link active" id="navUsersTable" role="tab" data-toggle="tab"
-                           href="#usersTable">Users
+                           href="#usersTable" onclick="tableInfo()">Users
                             Table</a>
                         <a class="nav-item nav-link" data-toggle="tab" href="#addUser" onclick="showNewModal()">New
                             User</a>
@@ -127,7 +127,7 @@
                                         </select>
                                     </div>
                                     <br>
-                                    <button type="submit" onclick="addUser()" class="btn btn-success">Add new user
+                                    <button onclick="addUser()" href="#usersTable" class="btn btn-success">Add new user
                                     </button>
                                 </form>
                             </div>

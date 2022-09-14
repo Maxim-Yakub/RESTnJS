@@ -17,23 +17,41 @@ function addUser() {
             body: JSON.stringify(user)
 
         })
-            .then((r) => {
+            // .then((r) => {
+            //     refreshTable();
+            //     // tableInfo();
+            //     $('.nav-tabs a[href="#usersTable"]').tab('show');
+            //
+            //     //очистка формы
+            //     newUserForm.reset();
+            // })
+            .then(res => res.json())
+            .then(data => {
                 refreshTable();
-                // tableInfo();
+                users = data;
+                tableInfo(users);
+                // document.getElementById('navUsersTable').click();
                 $('.nav-tabs a[href="#usersTable"]').tab('show');
 
-                //очистка формы
-                newUserForm.reset();
             })
+        // refreshTable();
+
+        // .then(res => {
+        //     // document.getElementById('navUsersTable').click()
+        //     // alert('Пользователь добавлен')
+        //         $('.nav-tabs a[href="#usersTable"]').tab('show');
+        //
+        // })
+
     })
 }
 
 function refreshTable() {
     let table = document.querySelector('#tableBodyInfo')
-    while (table.rows.length > 1) {
-        table.deleteRow(1)
+    while (table.rows.length > -1) {
+        table.deleteRow(0)
     }
-    setTimeout(tableInfo, 50);
+    // setTimeout(tableInfo, 50);
 }
 
 function getAllRoles() {
