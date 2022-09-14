@@ -1,12 +1,12 @@
-package ru.kata.spring.boot_security.demo.controller;
+package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.kata.spring.boot_security.demo.model.Role;
-import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.models.Role;
+import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.services.UserService;
 
 import java.util.List;
 
@@ -27,6 +27,7 @@ public class AdminRestController {
         List<User> allUsers = userService.getAll();
 
         return allUsers != null && !allUsers.isEmpty()
+
                 ? new ResponseEntity<>(allUsers, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -36,6 +37,7 @@ public class AdminRestController {
         User user = userService.get(id);
 
         return (user != null)
+
                 ? new ResponseEntity<>(user, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -44,8 +46,10 @@ public class AdminRestController {
     public  ResponseEntity<User> addNewUser(@RequestBody User user) {
 
         if (userService.findByUsername(user.getUsername()) == null) {
+
             userService.save(user);
         }
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -64,6 +68,7 @@ public class AdminRestController {
 
     @GetMapping("/roles")
     private List<Role> allRoles() {
+
         return userService.listRoles();
     }
 }

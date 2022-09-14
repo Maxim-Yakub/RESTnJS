@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.model;
+package ru.kata.spring.boot_security.demo.models;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 
 @Entity
-@Data //будут сгенерированы гетеры и сетеры ломбоком
+@Data
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
 
@@ -18,6 +18,7 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
+
         return "ROLE_" + name;
     }
 }
