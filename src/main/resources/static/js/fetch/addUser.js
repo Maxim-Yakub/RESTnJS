@@ -21,6 +21,9 @@ function addUser() {
                 refreshTable();
                 // tableInfo();
                 $('.nav-tabs a[href="#usersTable"]').tab('show');
+
+                //очистка формы
+                newUserForm.reset();
             })
     })
 }
