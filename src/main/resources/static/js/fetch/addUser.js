@@ -19,11 +19,8 @@ function addUser() {
         })
             .then((r) => {
                 refreshTable();
-                // tableInfo();
                 $('.nav-tabs a[href="#usersTable"]').tab('show');
-
-                //очистка формы
-                // newUserForm.reset();
+                newUserForm.reset();
             })
 
     })
