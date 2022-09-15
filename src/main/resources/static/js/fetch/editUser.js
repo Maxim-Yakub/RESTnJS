@@ -118,20 +118,8 @@ function editUser() {
         },
         body: JSON.stringify(user)
     })
-        // .then(response => {
-        //     $('#' + id).replaceWith('<tr id=' + id + '>' +
-        //         '<td>' + id + '</td>' +
-        //         '<td>' + window.formEditUser.editUsername.value + '</td>' +
-        //         '<td>' + window.formEditUser.editEmail.value + '</td>' +
-        //         '<td>' + rolesList.textContent + '</td>' +
-        //         '<td> <button type="button" onclick="modalEdit(' + id + ')" class="btn btn-primary btn-sm">Edit</button> </td>' +
-        //         '<td> <button type="button" onclick="modalDelete(' + id + ')" class="btn btn-danger btn-sm">Delete</button> </td>' +
-        //         '</tr>');
-        // });
-
         .then((r) => {
             refreshTable();
-            // tableInfo();
             $('.nav-tabs a[href="#usersTable"]').tab('show');
         });
 }

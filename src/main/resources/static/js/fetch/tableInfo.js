@@ -6,23 +6,21 @@ function tableInfo() {
     fetch('/api/admin/users')
         .then(response => response.json())
         .then(users => {
+            let temp = '';
             users.forEach(function (user) {
-                const row = tableBodyInfo.insertRow();
-                row.setAttribute("id", user.id);
-                const cell0 = row.insertCell();
-                cell0.innerHTML = user.id;
-                const cell1 = row.insertCell();
-                cell1.innerHTML = user.username;
-                const cell2 = row.insertCell();
-                cell2.innerHTML = user.email;
-                const cell3 = row.insertCell();
-                cell3.innerHTML = rolesList(user).textContent;
-                const cell4 = row.insertCell();
-                cell4.innerHTML =
-                    '<button type="button" onclick="modalEdit(' + user.id + ')" class="btn btn-primary btn-sm">Edit</button>';
-                const cell5 = row.insertCell();
-                cell5.innerHTML =
-                    '<button type="button" onclick="modalDelete(' + user.id + ')" class="btn btn-danger btn-sm">Delete</button>';
-            })
+                temp += `
+                  <tr>
+                        <td>${user.id}</td>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+
+                        <td>${user.roles.map(role => role.name)}</td>
+
+                   <td> <button type="button" onclick="modalEdit(${user.id})" class="btn btn-primary btn-sm">Edit</button> </td>
+
+                        <td> <button type="button" onclick="modalDelete(${user.id})" class="btn btn-danger btn-sm">Delete</button> </td>
+                  </tr>`;
+            });
+            document.querySelector('#tableBodyInfo').innerHTML = temp;
         });
 }

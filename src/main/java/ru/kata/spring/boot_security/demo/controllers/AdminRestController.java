@@ -49,19 +49,19 @@ public class AdminRestController {
     }
 
     @PostMapping()
-//    public  ResponseEntity<User> createUser(@RequestBody User user) {
-//
-//        if (userService.findUserByUsername(user.getUsername()) == null) {
-//
-//            userService.createUser(user);
-//        }
-//
-//        return new ResponseEntity<>(HttpStatus.CREATED);
-//    }
-    public List<User> createUser (@RequestBody User user) {
-        userService.createUser(user);
-        return userService.getAllUsers();
+    public  ResponseEntity<User> createUser(@RequestBody User user) {
+
+        if (userService.findUserByUsername(user.getUsername()) == null) {
+
+            userService.createUser(user);
+        }
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
+//    public List<User> createUser (@RequestBody User user) {
+//        userService.createUser(user);
+//        return userService.getAllUsers();
+//    }
 
     @PutMapping()
     public void updateUser(@RequestBody User user) {

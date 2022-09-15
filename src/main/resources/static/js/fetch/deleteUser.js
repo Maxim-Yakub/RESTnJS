@@ -89,6 +89,7 @@ function deleteUser(id) {
         headers: {"Content-type": "application/json; charset=UTF-8"}
     })
         .then(response => {
-            $('#' + id).remove();
+            refreshTable();
+            $('.nav-tabs a[href="#usersTable"]').tab('show');
         });
 }
