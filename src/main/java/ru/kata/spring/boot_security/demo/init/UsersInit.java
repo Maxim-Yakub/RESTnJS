@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.inits;
+package ru.kata.spring.boot_security.demo.init;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
