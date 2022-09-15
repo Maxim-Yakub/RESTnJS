@@ -14,7 +14,7 @@ function tableInfo() {
                         <td>${user.username}</td>
                         <td>${user.email}</td>
 
-                        <td>${user.roles.map(role => role.name)}</td>
+                        <td>${user.roles.map(role => " " + role.name )}</td>
 
                    <td> <button type="button" onclick="modalEdit(${user.id})" class="btn btn-primary btn-sm">Edit</button> </td>
 
